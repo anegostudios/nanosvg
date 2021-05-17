@@ -6,8 +6,8 @@ project "nanosvg"
 	platforms {"native", "x64", "x32"}
 	kind "SharedLib"
 	
-	includedirs { "src" }
-	files { "src/**.c", "src/**.h" }
+	includedirs { "include" }
+	files { "src/*.c" }
 
 	defines { 
 		"NANOSVG_IMPLEMENTATION",
