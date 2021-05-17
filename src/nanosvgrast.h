@@ -2,8 +2,6 @@
 #define NANOSVGRAST_H
 
 #include <nanosvg.h>
-	
-#define DLL_EXPORT __declspec(dllexport)
 
 typedef struct NSVGrasterizer NSVGrasterizer;
 
