@@ -33,28 +33,6 @@
 #include <string.h>
 #include <math.h>
 
-#define NSVG_PI (3.14159265358979323846264338327f)
-#define NSVG_KAPPA90 (0.5522847493f)	// Length proportional to radius of a cubic bezier handle for 90deg arcs.
-
-#define NSVG_ALIGN_MIN 0
-#define NSVG_ALIGN_MID 1
-#define NSVG_ALIGN_MAX 2
-#define NSVG_ALIGN_NONE 0
-#define NSVG_ALIGN_MEET 1
-#define NSVG_ALIGN_SLICE 2
-
-#define NSVG_NOTUSED(v) do { (void)(1 ? (void)0 : ( (void)(v) ) ); } while(0)
-#define NSVG_RGB(r, g, b) (((unsigned int)r) | ((unsigned int)g << 8) | ((unsigned int)b << 16))
-
-#ifdef _MSC_VER
-	#pragma warning (disable: 4996) // Switch off security warnings
-	#pragma warning (disable: 4100) // Switch off unreferenced formal parameter warnings
-	#define NSVG_INLINE
-#else
-	#define NSVG_INLINE inline
-#endif
-
-
 static int nsvg__isspace(char c)
 {
 	return strchr(" \t\n\v\f\r", c) != 0;
@@ -67,7 +45,6 @@ static int nsvg__isdigit(char c)
 
 static NSVG_INLINE float nsvg__minf(float a, float b) { return a < b ? a : b; }
 static NSVG_INLINE float nsvg__maxf(float a, float b) { return a > b ? a : b; }
-
 
 // Simple XML parser
 

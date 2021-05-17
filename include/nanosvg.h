@@ -3,41 +3,26 @@
 
 #define DLL_EXPORT __declspec(dllexport)
 
-// NanoSVG is a simple stupid single-header-file SVG parse. The output of the parser is a list of cubic bezier shapes.
-//
-// The library suits well for anything from rendering scalable icons in your editor application to prototyping a game.
-//
-// NanoSVG supports a wide range of SVG features, but something may be missing, feel free to create a pull request!
-//
-// The shapes in the SVG images are transformed by the viewBox and converted to specified units.
-// That is, you should get the same looking data as your designed in your favorite app.
-//
-// NanoSVG can return the paths in few different units. For example if you want to render an image, you may choose
-// to get the paths in pixels, or if you are feeding the data into a CNC-cutter, you may want to use millimeters.
-//
-// The units passed to NanoSVG should be one of: 'px', 'pt', 'pc' 'mm', 'cm', or 'in'.
-// DPI (dots-per-inch) controls how the unit conversion is done.
-//
-// If you don't know or care about the units stuff, "px" and 96 should get you going.
+#define NSVG_PI (3.14159265358979323846264338327f)
+#define NSVG_KAPPA90 (0.5522847493f)	// Length proportional to radius of a cubic bezier handle for 90deg arcs.
 
+#define NSVG_ALIGN_MIN 0
+#define NSVG_ALIGN_MID 1
+#define NSVG_ALIGN_MAX 2
+#define NSVG_ALIGN_NONE 0
+#define NSVG_ALIGN_MEET 1
+#define NSVG_ALIGN_SLICE 2
 
-/* Example Usage:
-	// Load SVG
-	NSVGimage* image;
-	image = nsvgParseFromFile("test.svg", "px", 96);
-	printf("size: %f x %f\n", image->width, image->height);
-	// Use...
-	for (NSVGshape *shape = image->shapes; shape != NULL; shape = shape->next) {
-		for (NSVGpath *path = shape->paths; path != NULL; path = path->next) {
-			for (int i = 0; i < path->npts-1; i += 3) {
-				float* p = &path->pts[i*2];
-				drawCubicBez(p[0],p[1], p[2],p[3], p[4],p[5], p[6],p[7]);
-			}
-		}
-	}
-	// Delete
-	nsvgDelete(image);
-*/
+#define NSVG_NOTUSED(v) do { (void)(1 ? (void)0 : ( (void)(v) ) ); } while(0)
+#define NSVG_RGB(r, g, b) (((unsigned int)r) | ((unsigned int)g << 8) | ((unsigned int)b << 16))
+
+#ifdef _MSC_VER
+	#pragma warning (disable: 4996) // Switch off security warnings
+	#pragma warning (disable: 4100) // Switch off unreferenced formal parameter warnings
+	#define NSVG_INLINE
+#else
+	#define NSVG_INLINE inline
+#endif
 
 enum NSVGpaintType {
 	NSVG_PAINT_NONE = 0,
