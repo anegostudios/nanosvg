@@ -1,14 +1,7 @@
-
 #ifndef NANOSVGRAST_H
 #define NANOSVGRAST_H
 
 #include <nanosvg.h>
-
-#ifndef NANOSVGRAST_CPLUSPLUS
-#ifdef __cplusplus
-extern "C" {
-#endif
-#endif
 	
 #define DLL_EXPORT __declspec(dllexport)
 
@@ -45,13 +38,6 @@ DLL_EXPORT void nsvgRasterize(NSVGrasterizer* r,
 
 // Deletes rasterizer context.
 DLL_EXPORT void nsvgDeleteRasterizer(NSVGrasterizer*);
-
-
-#ifndef NANOSVGRAST_CPLUSPLUS
-#ifdef __cplusplus
-}
-#endif
-#endif
 
 #endif // NANOSVGRAST_H
 

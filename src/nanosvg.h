@@ -1,12 +1,5 @@
-
 #ifndef NANOSVG_H
 #define NANOSVG_H
-
-#ifndef NANOSVG_CPLUSPLUS
-#ifdef __cplusplus
-extern "C" {
-#endif
-#endif
 
 #define DLL_EXPORT __declspec(dllexport)
 
@@ -150,11 +143,4 @@ DLL_EXPORT NSVGpath* nsvgDuplicatePath(NSVGpath* p);
 // Deletes an image.
 DLL_EXPORT void nsvgDelete(NSVGimage* image);
 
-#ifndef NANOSVG_CPLUSPLUS
-#ifdef __cplusplus
-}
-#endif
-#endif
-
 #endif // NANOSVG_H
-
