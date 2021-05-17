@@ -9,12 +9,6 @@ project "nanosvg"
 	includedirs { "include" }
 	files { "src/*.c" }
 
-	defines { 
-		"NANOSVG_IMPLEMENTATION",
-		"NANOSVGRAST_IMPLEMENTATION", 
-		"NANOSVG_ALL_COLOR_KEYWORDS"
-	}
-
 	configuration "Debug"
 		defines {"DEBUG"}
 		flags {"Symbols"}

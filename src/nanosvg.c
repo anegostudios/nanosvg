@@ -28,8 +28,6 @@
 
 #include <nanosvg.h>
 
-#ifdef NANOSVG_IMPLEMENTATION
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,11 +49,7 @@
 #ifdef _MSC_VER
 	#pragma warning (disable: 4996) // Switch off security warnings
 	#pragma warning (disable: 4100) // Switch off unreferenced formal parameter warnings
-	#ifdef __cplusplus
-	#define NSVG_INLINE inline
-	#else
 	#define NSVG_INLINE
-	#endif
 #else
 	#define NSVG_INLINE inline
 #endif
@@ -1109,8 +1103,6 @@ NSVGNamedColor nsvg__colors[] = {
 	{ "grey", NSVG_RGB(128, 128, 128) },
 	{ "gray", NSVG_RGB(128, 128, 128) },
 	{ "white", NSVG_RGB(255, 255, 255) },
-
-#ifdef NANOSVG_ALL_COLOR_KEYWORDS
 	{ "aliceblue", NSVG_RGB(240, 248, 255) },
 	{ "antiquewhite", NSVG_RGB(250, 235, 215) },
 	{ "aqua", NSVG_RGB( 0, 255, 255) },
@@ -1247,8 +1239,7 @@ NSVGNamedColor nsvg__colors[] = {
 	{ "violet", NSVG_RGB(238, 130, 238) },
 	{ "wheat", NSVG_RGB(245, 222, 179) },
 	{ "whitesmoke", NSVG_RGB(245, 245, 245) },
-	{ "yellowgreen", NSVG_RGB(154, 205, 50) },
-#endif
+	{ "yellowgreen", NSVG_RGB(154, 205, 50) }
 };
 
 static unsigned int nsvg__parseColorName(const char* str)
@@ -2863,5 +2854,3 @@ void nsvgDelete(NSVGimage* image)
 	}
 	free(image);
 }
-
-#endif

@@ -1,8 +1,6 @@
 #ifndef NANOSVGRAST_H
 #define NANOSVGRAST_H
 
-#include <nanosvg.h>
-
 typedef struct NSVGrasterizer NSVGrasterizer;
 
 /* Example Usage:

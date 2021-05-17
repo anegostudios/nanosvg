@@ -22,10 +22,8 @@
  *
  */
 
+#include <nanosvg.h>
 #include <nanosvgrast.h>
-
-
-#ifdef NANOSVGRAST_IMPLEMENTATION
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1402,5 +1400,3 @@ void nsvgRasterize(NSVGrasterizer* r,
 	r->height = 0;
 	r->stride = 0;
 }
-
-#endif
