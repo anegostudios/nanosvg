@@ -124,9 +124,9 @@ typedef struct NSVGSize
 
 typedef struct NSVGimage
 {
-	NSVGSize size;                // Width/height of the SVG
-	NSVGViewbox viewBox;		      // Viewbox of the SVG.
-	NSVGshape* shapes;			      // Linked list of shapes in the SVG.
+	NSVGSize size;				// Width/height of the SVG
+	NSVGViewbox viewBox;		// Viewbox of the SVG.
+	NSVGshape* shapes;			// Linked list of shapes in the SVG.
 } NSVGimage;
 
 // Parses SVG file from a file, returns SVG image as paths.
@@ -136,8 +136,8 @@ DLL_EXPORT NSVGimage* nsvgParseFromFile(const char* filename, const char* units,
 // Important note: changes the string.
 DLL_EXPORT NSVGimage* nsvgParse(char* input, const char* units, float dpi);
 
-DLL_EXPORT void nsvgImageGetSize(NSVGimage* image, NSVGSize* outSize);
-DLL_EXPORT void nsvgImageGetViewbox(NSVGimage* image, NSVGViewbox* outViewbox);
+DLL_EXPORT NSVGSize* nsvgImageGetSize(NSVGimage* image);
+DLL_EXPORT NSVGViewbox* nsvgImageGetViewbox(NSVGimage* image);
 
 // Duplicates a path.
 DLL_EXPORT NSVGpath* nsvgDuplicatePath(NSVGpath* p);
