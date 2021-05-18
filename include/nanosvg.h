@@ -136,8 +136,8 @@ DLL_EXPORT NSVGimage* nsvgParseFromFile(const char* filename, const char* units,
 // Important note: changes the string.
 DLL_EXPORT NSVGimage* nsvgParse(char* input, const char* units, float dpi);
 
-DLL_EXPORT void nsvgImageGetSize(NSVGimage* nsvg, NSVGSize* outSize);
-DLL_EXPORT void nsvgImageGetViewbox(NSVGimage* nsvg, NSVGViewbox* outViewbox);
+DLL_EXPORT void nsvgImageGetSize(NSVGimage* image, NSVGSize* outSize);
+DLL_EXPORT void nsvgImageGetViewbox(NSVGimage* image, NSVGViewbox* outViewbox);
 
 // Duplicates a path.
 DLL_EXPORT NSVGpath* nsvgDuplicatePath(NSVGpath* p);

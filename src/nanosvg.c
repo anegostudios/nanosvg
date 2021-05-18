@@ -2824,16 +2824,18 @@ error:
     return NULL;
 }
 
-void nsvgImageGetSize(NSVGimage* nsvg, NSVGSize* outSize)
+void nsvgImageGetSize(NSVGimage* image, NSVGSize* outSize)
 {
-	//outSize = &nsvg->size;
-	*outSize = nsvg->size;
+	if (image == NULL) return;
+	//outSize = &image->size;
+	*outSize = image->size;
 }
 
-void nsvgImageGetViewbox(NSVGimage* nsvg, NSVGViewbox* outViewbox)
+void nsvgImageGetViewbox(NSVGimage* image, NSVGViewbox* outViewbox)
 {
-	//outViewbox = &nsvg->viewBox;
-	*outViewbox = nsvg->viewBox;
+	if (image == NULL) return;
+	//outViewbox = &image->viewBox;
+	*outViewbox = image->viewBox;
 }
 
 void nsvgDelete(NSVGimage* image)
