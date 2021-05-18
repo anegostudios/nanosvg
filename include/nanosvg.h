@@ -108,11 +108,25 @@ typedef struct NSVGshape
 	struct NSVGshape* next;		// Pointer to next shape, or NULL if last element.
 } NSVGshape;
 
+typedef struct NSVGViewbox
+{
+	float viewMinx;
+	float viewMiny;
+	float viewWidth;
+	float viewHeight;
+} NSVGViewbox;
+
+typedef struct NSVGSize
+{
+    float width;
+    float height;
+} NSVGSize;
+
 typedef struct NSVGimage
 {
-	float width;				// Width of the image.
-	float height;				// Height of the image.
-	NSVGshape* shapes;			// Linked list of shapes in the image.
+	NSVGSize size;                // Width/height of the SVG
+	NSVGViewbox viewBox;		      // Viewbox of the SVG.
+	NSVGshape* shapes;			      // Linked list of shapes in the SVG.
 } NSVGimage;
 
 // Parses SVG file from a file, returns SVG image as paths.
@@ -121,6 +135,9 @@ DLL_EXPORT NSVGimage* nsvgParseFromFile(const char* filename, const char* units,
 // Parses SVG file from a null terminated string, returns SVG image as paths.
 // Important note: changes the string.
 DLL_EXPORT NSVGimage* nsvgParse(char* input, const char* units, float dpi);
+
+DLL_EXPORT void nsvgImageGetSize(NSVGimage* nsvg, NSVGSize* outSize);
+DLL_EXPORT void nsvgImageGetViewbox(NSVGimage* nsvg, NSVGViewbox* outViewbox);
 
 // Duplicates a path.
 DLL_EXPORT NSVGpath* nsvgDuplicatePath(NSVGpath* p);

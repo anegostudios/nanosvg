@@ -2359,9 +2359,9 @@ static void nsvg__parseSVG(NSVGparser* p, const char** attr)
 	for (i = 0; attr[i]; i += 2) {
 		if (!nsvg__parseAttr(p, attr[i], attr[i + 1])) {
 			if (strcmp(attr[i], "width") == 0) {
-				p->image->width = nsvg__parseCoordinate(p, attr[i + 1], 0.0f, 0.0f);
+				p->image->size.width = nsvg__parseCoordinate(p, attr[i + 1], 0.0f, 0.0f);
 			} else if (strcmp(attr[i], "height") == 0) {
-				p->image->height = nsvg__parseCoordinate(p, attr[i + 1], 0.0f, 0.0f);
+				p->image->size.height = nsvg__parseCoordinate(p, attr[i + 1], 0.0f, 0.0f);
 			} else if (strcmp(attr[i], "viewBox") == 0) {
 				const char *s = attr[i + 1];
 				char buf[64];
@@ -2654,30 +2654,30 @@ static void nsvg__scaleToViewbox(NSVGparser* p, const char* units)
 	nsvg__imageBounds(p, bounds);
 
 	if (p->viewWidth == 0) {
-		if (p->image->width > 0) {
-			p->viewWidth = p->image->width;
+		if (p->image->size.width > 0) {
+			p->viewWidth = p->image->size.width;
 		} else {
 			p->viewMinx = bounds[0];
 			p->viewWidth = bounds[2] - bounds[0];
 		}
 	}
 	if (p->viewHeight == 0) {
-		if (p->image->height > 0) {
-			p->viewHeight = p->image->height;
+		if (p->image->size.height > 0) {
+			p->viewHeight = p->image->size.height;
 		} else {
 			p->viewMiny = bounds[1];
 			p->viewHeight = bounds[3] - bounds[1];
 		}
 	}
-	if (p->image->width == 0)
-		p->image->width = p->viewWidth;
-	if (p->image->height == 0)
-		p->image->height = p->viewHeight;
+	if (p->image->size.width == 0)
+		p->image->size.width = p->viewWidth;
+	if (p->image->size.height == 0)
+		p->image->size.height = p->viewHeight;
 
 	tx = -p->viewMinx;
 	ty = -p->viewMiny;
-	sx = p->viewWidth > 0 ? p->image->width / p->viewWidth : 0;
-	sy = p->viewHeight > 0 ? p->image->height / p->viewHeight : 0;
+	sx = p->viewWidth > 0 ? p->image->size.width / p->viewWidth : 0;
+	sy = p->viewHeight > 0 ? p->image->size.height / p->viewHeight : 0;
 	// Unit scaling
 	us = 1.0f / nsvg__convertToPixels(p, nsvg__coord(1.0f, nsvg__parseUnits(units)), 0.0f, 1.0f);
 
@@ -2685,13 +2685,13 @@ static void nsvg__scaleToViewbox(NSVGparser* p, const char* units)
 	if (p->alignType == NSVG_ALIGN_MEET) {
 		// fit whole image into viewbox
 		sx = sy = nsvg__minf(sx, sy);
-		tx += nsvg__viewAlign(p->viewWidth*sx, p->image->width, p->alignX) / sx;
-		ty += nsvg__viewAlign(p->viewHeight*sy, p->image->height, p->alignY) / sy;
+		tx += nsvg__viewAlign(p->viewWidth*sx, p->image->size.width, p->alignX) / sx;
+		ty += nsvg__viewAlign(p->viewHeight*sy, p->image->size.height, p->alignY) / sy;
 	} else if (p->alignType == NSVG_ALIGN_SLICE) {
 		// fill whole viewbox with image
 		sx = sy = nsvg__maxf(sx, sy);
-		tx += nsvg__viewAlign(p->viewWidth*sx, p->image->width, p->alignX) / sx;
-		ty += nsvg__viewAlign(p->viewHeight*sy, p->image->height, p->alignY) / sy;
+		tx += nsvg__viewAlign(p->viewWidth*sx, p->image->size.width, p->alignX) / sx;
+		ty += nsvg__viewAlign(p->viewHeight*sy, p->image->size.height, p->alignY) / sy;
 	}
 
 	// Transform
@@ -2748,6 +2748,14 @@ NSVGimage* nsvgParse(char* input, const char* units, float dpi)
 
 	// Scale to viewBox
 	nsvg__scaleToViewbox(p, units);
+
+	struct NSVGViewbox viewbox = {
+		.viewMinx = p->viewMinx,
+		.viewMiny = p->viewMiny,
+		.viewWidth = p->viewWidth,
+		.viewHeight = p->viewHeight,
+	};
+	p->image->viewBox = viewbox;
 
 	ret = p->image;
 	p->image = NULL;
@@ -2814,6 +2822,18 @@ error:
         free(res);
     }
     return NULL;
+}
+
+void nsvgImageGetSize(NSVGimage* nsvg, NSVGSize* outSize)
+{
+	//outSize = &nsvg->size;
+	*outSize = nsvg->size;
+}
+
+void nsvgImageGetViewbox(NSVGimage* nsvg, NSVGViewbox* outViewbox)
+{
+	//outViewbox = &nsvg->viewBox;
+	*outViewbox = nsvg->viewBox;
 }
 
 void nsvgDelete(NSVGimage* image)
