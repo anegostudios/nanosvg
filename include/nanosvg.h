@@ -1,7 +1,12 @@
 #ifndef NANOSVG_H
 #define NANOSVG_H
 
-#define DLL_EXPORT __declspec(dllexport)
+#if defined(_WIN32)
+    //  Microsoft 
+    #define DLL_EXPORT __declspec(dllexport)
+#else
+    #define DLL_EXPORT __attribute__((visibility("default")))
+#endif
 
 #define NSVG_PI (3.14159265358979323846264338327f)
 #define NSVG_KAPPA90 (0.5522847493f)	// Length proportional to radius of a cubic bezier handle for 90deg arcs.
