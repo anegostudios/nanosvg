@@ -1,4 +1,4 @@
-*This project is not actively maintained.*
+Standalone linked library version of NanoSVG with additional feature to suit the needs of the game Vintage Story.
 
 Nano SVG
 ==========
