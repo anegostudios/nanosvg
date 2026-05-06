@@ -82,19 +82,26 @@ By default, NanoSVG parses only the most common colors. In order to get support 
 
 In order to compile the demo project, your will need to install [GLFW](http://www.glfw.org/) to compile.
 
-NanoSVG demo project uses [premake4](http://industriousone.com/premake) to build platform specific projects, now is good time to install it if you don't have it already. To build the example, navigate into the root folder in your favorite terminal, then:
+NanoSVG demo project uses [premake](https://github.com/premake/premake-core) to build platform specific projects, now is good time to install it if you don't have it already. To build the example, navigate into the root folder in your favorite terminal, then:
 
-- *OS X*: `premake4 xcode4`
-- *Windows*: `premake4 vs2010`
-- *Linux*: `premake4 gmake`
+- *OS X*: `premake5 xcode4`
+- *Windows*: `premake5 vs2022`
+- *Linux*: `premake5 gmake2`
 
-See premake4 documentation for full list of supported build file types. The projects will be created in `build` folder. An example of building and running the example on OS X:
+See premake4 documentation for full list of supported build file types. 
+
+An example of building OS X / linux:
 
 ```bash
-$ premake4 gmake
-$ cd build/
+$ premake4 gmake2
 $ make
-$ ./example
+```
+
+Windows:
+
+```bash
+$ premake4 vs2022
+$ msbuild nanosvg.sln /p:Configuration=Release # using a vs2022 dev powershell, or open it in vs 2022 and build it there
 ```
 
 # License
