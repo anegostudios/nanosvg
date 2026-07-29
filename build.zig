@@ -8,8 +8,8 @@ pub fn build(b: *std.Build) !void {
     });
     const vs_mode = b.option(bool, "vs-mode", "Target installation into the vs game repo, put the files into the correct subfolders.") orelse false;
 
-    const debug_flags   = &[_][]const u8{ "-O0", "-DDEBUG", "-g" };
-    const release_flags = &[_][]const u8{ "-O2", "-DNDEBUG" };
+    const debug_flags   = &[_][]const u8{ "-O0", "-DDEBUG", "-g", "-fno-sanitize=undefined" };
+    const release_flags = &[_][]const u8{ "-O2", "-DNDEBUG", "-fno-sanitize=undefined" };
 
     const c_flags = if (optimize == .Debug) debug_flags else release_flags;
 
