@@ -104,6 +104,19 @@ $ premake4 vs2022
 $ msbuild nanosvg.sln /p:Configuration=Release # using a vs2022 dev powershell, or open it in vs 2022 and build it there
 ```
 
+### Compiling the lib for VS
+[Zig](https://ziglang.org/download/) build can be used to cross compile the library for all the systems supported by vs in a convenient fashion:
+
+```
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-linux-musl
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-linux-musl
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-macos
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-macos
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-windows-msvc
+```
+
+For this you simply need to have downloaded and put the zig executable in your path. This requires version 0.14 as of now.
+
 # License
 
 The library is licensed under [zlib license](LICENSE.txt)
