@@ -3,3 +3,5 @@
 *.make
 Makefile
 obj/
+zig-out/
+.zig-cache/

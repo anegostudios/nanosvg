@@ -1,0 +1,7 @@
+.{
+    .name = .nanosvg,
+    .version = "0.0.0",
+    .fingerprint = 0x3c0ee6c2de893c3b,
+    .minimum_zig_version = "0.14.0",
+    .paths = .{""},
+}
