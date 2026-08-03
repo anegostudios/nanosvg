@@ -108,8 +108,8 @@ $ msbuild nanosvg.sln /p:Configuration=Release # using a vs2022 dev powershell, 
 [Zig](https://ziglang.org/download/) build can be used to cross compile the library for all the systems supported by vs in a convenient fashion:
 
 ```
-zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-linux-musl
-zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-linux-musl
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-linux-gnu.2.34 
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-linux-gnu.2.34
 zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-macos
 zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-macos
 zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-windows-msvc
