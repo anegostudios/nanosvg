@@ -112,7 +112,7 @@ zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-
 zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-linux-gnu.2.34
 zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-macos
 zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=aarch64-macos
-zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-windows-msvc
+zig build --release -Dvs-mode=true -p path/to/your/vs/game/repo -Dtarget=x86_64-windows-gnu
 ```
 
 For this you simply need to have downloaded and put the zig executable in your path. This requires version 0.14 as of now.
